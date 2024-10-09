@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+textarea {
+  @apply
+  bg-transparent
+  resize-none
+  border-none
+  outline-none
+}
+
+.todo-item{
+  @apply 
+    flex
+    shadow-sm
+    border
+    border-gray-200
+    rounded-md
+    w-full
+    relative
+    px-8
+    py-8
+    items-start
+    justify-between
+    flex-col
+    gap-5
+    mobile:px-4
+}
+
+input::placeholder, label, select {
+  @apply
+  text-gray-500
+}
+
+
+input {
+  font: inherit;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea {
+  overflow-wrap: break-word;
+}
+
+@keyframes notification-entry {
+
+  from {
+    opacity: 0;
+    bottom: 80px;
+  }
+
+  to {
+    opacity: 1;
+    bottom: 20px;
+  }
+
+}
+
+@keyframes notification-exit {
+
+  from {
+    opacity: 1;
+    bottom: 20px;
+  }
+
+  to {
+    opacity: 0;
+    bottom: 80px;
+  }
+
+}
+
+.animation-start {
+  animation: notification-entry 0.7s ease-in-out;
+}
+
+.animation-end {
+  animation: notification-exit 0.7s ease-in-out;
+}
+
+@keyframes card-entry {
+
+  from {
+    opacity: 0;
+    bottom: 80px;
+  }
+
+  to {
+    opacity: 1;
+    bottom: 0px;
+  }
+
+}
+
+@keyframes card-exit {
+
+  from {
+    opacity: 1;
+    bottom: 0px;
+  }
+
+  to {
+    opacity: 0;
+    bottom: 80px;
+  }
+
+}
+
+.card-animation-start {
+  animation: card-entry 0.7s ease-in-out;
+}
+
+.card-animation-exit {
+  animation: card-exit 0.7s ease-in-out;
+}

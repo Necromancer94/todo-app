@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do app</title>
+    <link rel="stylesheet" href="src/output.css">
+    <link rel="stylesheet" href="node_modules/air-datepicker/air-datepicker.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap">
+    <link rel="icon" type="image/png" href="/assets/favicon.png">
+</head>
+
+<body class="antialiased leading-normal bg-gray-50 m-auto">
+
+    <section class="flex flex-col items-center justify-center w-full p-24 mobile:p-6 mx-auto max-w-[1366px]">
+
+        <div
+            class="hero-text mb-10 w-full mobile:text-center mobile:flex mobile:flex-col mobile:items-center mobile:justify-center mobile:mt-16">
+
+            <textarea id="list-title" rows="1" cols="1" placeholder="Edit me" maxlength="25"
+                class="w-full mb-6 text-6xl font-bold text-gray-900 mobile:text-4xl mobile:text-center h-20"></textarea>
+            <textarea id="list-description" rows="2" cols="1"
+                class="text-gray-500 bg-transparent w-full mobile:text-center" maxlength="150"
+                placeholder="Fugiat veniam qui do veniam et.Quis cupidatat incididunt ipsum dolore quis aute minim adipisicing reprehenderit occaecat."></textarea>
+        </div>
+
+        <div
+            class="search-box flex gap-5 justify-center items-stretch mb-10 w-full mobile:flex-col mobile:items-center">
+            <input id="todo-input"
+                class="border border-gray-100 min-h-10 min-w-[280px] w-full search-field rounded-lg p-4 pe-12 text-sm shadow-sm focus:outline-blue-300 bg-white"
+                type="text" placeholder="Type something" maxlength="250">
+
+
+            <button id="add-btn"
+                class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white hover:opacity-80 w-28 shadow-sm mobile:w-full">
+                Add item
+            </button>
+        </div>
+
+        <div class="flex gap-10 w-full  items-center mb-10 mobile:flex-col">
+
+            <div
+                class="todo-count rounded-lg border border-gray-300 w-fit bg-gray-100 p-2 text-sm font-medium text-gray-600">
+                0 todos left
+            </div>
+
+
+            <div class="inline-flex rounded-lg border border-gray-100 bg-gray-100 p-1 w-fit mobile:text-xs text-sm">
+
+                <button
+                    class="filter-btn inline-block rounded-md px-4 py-2  text-gray-500 hover:text-gray-700 focus:relative bg-white !text-blue-500">Show
+                    all
+                </button>
+
+                <button
+                    class="filter-btn inline-block rounded-md px-4 py-2  text-gray-500 hover:text-gray-700 focus:relative">
+                    Urgent priority
+                </button>
+
+                <button
+                    class="filter-btn inline-block rounded-md px-4 py-2  text-gray-500 hover:text-gray-700 focus:relative">
+                    High priority
+                </button>
+
+                <button
+                    class="filter-btn inline-block rounded-md px-4 py-2 text-gray-500 hover:text-gray-700 focus:relative">
+                    Medium priority
+                </button>
+
+                <button
+                    class="filter-btn inline-block rounded-md px-4 py-2  text-gray-500 hover:text-gray-700 focus:relative">
+                    Low priority
+                </button>
+
+            </div>
+        </div>
+
+        <!-- todolist -->
+        <div class="todo-list mb-10 flex flex-wrap justify-center relative w-full gap-10">
+            <!-- todoitems -->
+            <!-- todoitemsend -->
+        </div>
+
+        </div>
+
+    </section>
+
+    <footer class="bg-gray-100 py-10 mt-10 text-center mx-auto">
+        <a class="flex justify-center items-center gap-8 mb-10" href="https://github.com/Necromancer94" target="_blank">
+            <p class="text-sm text-gray-500 underline transition hover:text-gray-700/75">
+                Check out my projects on Github
+            </p>
+            <img class="w-6 cursor-pointer" src="assets/github-mark.svg">
+        </a>
+
+        <div>
+            <p class="text-xs text-gray-700">
+                Created with
+                <a href="https://tailwindcss.com/" class="underline transition hover:text-gray-700/75">Tailwind CSS</a>,
+                <a href="https://air-datepicker.com/examples"
+                    class="underline transition hover:text-gray-700/75">AirDatePicker</a> and
+                <a href="https://www.hyperui.dev/" class="underline transition hover:text-gray-700/75">Hyper UI</a>.
+            </p>
+        </div>
+    </footer>
+
+    <script src="node_modules/air-datepicker/air-datepicker.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
