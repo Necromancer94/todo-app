@@ -58,42 +58,6 @@ textarea {
   overflow-wrap: break-word;
 }
 
-@keyframes notification-entry {
-
-  from {
-    opacity: 0;
-    bottom: 80px;
-  }
-
-  to {
-    opacity: 1;
-    bottom: 20px;
-  }
-
-}
-
-@keyframes notification-exit {
-
-  from {
-    opacity: 1;
-    bottom: 20px;
-  }
-
-  to {
-    opacity: 0;
-    bottom: 80px;
-  }
-
-}
-
-.animation-start {
-  animation: notification-entry 0.7s ease-in-out;
-}
-
-.animation-end {
-  animation: notification-exit 0.7s ease-in-out;
-}
-
 @keyframes card-entry {
 
   from {
@@ -128,4 +92,100 @@ textarea {
 
 .card-animation-exit {
   animation: card-exit 0.7s ease-in-out;
+}
+
+.overlay-modal {
+  opacity: 0.6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.alert-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.notification-box{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+
+@keyframes opacity-entry {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+@keyframes opacity-exit {
+
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+
+}
+
+.opacity-entry {
+  animation: opacity-entry 0.3s ease-in-out;
+}
+
+.opacity-exit {
+  animation: opacity-exit 0.3s ease-in-out;
+}
+
+@keyframes notification-entry {
+
+  from {
+    opacity: 0;
+    bottom: 80px;
+  }
+
+  to {
+    opacity: 1;
+    bottom: 20px;
+  }
+
+}
+
+@keyframes notification-exit {
+
+  from {
+    opacity: 1;
+    bottom: 20px;
+  }
+
+  to {
+    opacity: 0;
+    bottom: 80px;
+  }
+
+}
+
+.notification-entry {
+  animation: notification-entry 0.7s ease-in-out;
+}
+
+.notification-exit {
+  animation: notification-exit 0.7s ease-in-out;
 }

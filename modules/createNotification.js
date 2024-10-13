@@ -1,5 +1,3 @@
-import { fadeElement } from "./utils.js"
-
 async function deleteNotifications() {
     document.querySelectorAll('.notification-box').forEach((box) => {
         box.remove()
@@ -12,14 +10,18 @@ export async function createNotification(text, isWarning = false) {
 
     const body = document.querySelector('body')
     const newNotification = document.createElement('div')
-    newNotification.classList.add('notification-box', 'animation-start', 'fixed', 'bottom-5', 'right-5')
+    newNotification.classList.add('notification-box', 'notification-entry')
     newNotification.innerHTML = getHTML(text, isWarning)
 
     body.appendChild(newNotification)
+    setTimeout(() => {
+      newNotification.classList.replace('notification-entry', 'notification-exit')
+      newNotification.addEventListener('animationend' ,() => {
+        newNotification.remove()
+      })
+    },1200)
 
-    fadeElement(newNotification, 1200, 'remove')
 }
-
 
 function getHTML(content, warning) {
 

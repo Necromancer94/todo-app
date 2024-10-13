@@ -1,7 +1,14 @@
 import { todoActions } from "./todoActions.js"
-import { selectors } from "./utils.js"
+import { selectors, emojiContainer, colorContainer } from "./utils.js"
 import { createNotification } from "./createNotification.js"
 import { filterPrio } from "./listState.js"
+import { modalState, showModal } from "./modalOverlay.js";
+import { removeModal } from "./modalOverlay.js";
+
+let lastClickedEmojiIcon = null;
+let lastClickedColorIcon = null;
+
+export const body = document.querySelector('body')
 
 export function loadEventListeners() {
 
@@ -40,11 +47,13 @@ export function loadEventListeners() {
     selectors.todoContainer.addEventListener('click', (event) => {
 
         if (event.target.closest('.default-color')) {
-            todoActions.revealColorPalette(event.target.closest('.default-color'))
+            showModal(colorContainer, 'Choose a color')
+            lastClickedColorIcon = event.target.closest('.default-color')
         }
 
         if (event.target.closest('.default-emoji')) {
-            todoActions.revealEmojis(event.target.closest('.default-emoji'))
+            showModal(emojiContainer, 'Choose an emoji')
+            lastClickedEmojiIcon = event.target.closest('.default-emoji')
         }
 
         if (event.target.closest('.delete-icon')) {
@@ -53,10 +62,6 @@ export function loadEventListeners() {
 
         if (event.target.matches('.single-color')) {
             todoActions.storeColor(event.target)
-        }
-
-        if (event.target.matches('.single-emoji')) {
-            todoActions.storeEmoji(event.target)
         }
     })
 
@@ -82,6 +87,25 @@ export function loadEventListeners() {
 
         if (event.target.matches('.date-input')) {
             todoActions.storeDate(event.target)
+        }
+    })
+
+    //body
+
+    body.addEventListener('click', (event) => {
+
+        if (event.target.matches('.single-emoji')) {
+            const clickedSingleEmoji = event.target
+            todoActions.storeEmoji(clickedSingleEmoji, lastClickedEmojiIcon)
+        }
+
+        if (event.target.matches('.single-color')) {
+            const clickedColor = event.target
+            todoActions.storeColor(clickedColor, lastClickedColorIcon)
+        }
+
+        if (modalState.isModalVisible && event.target.matches('.overlay-modal')) {
+            removeModal()
         }
     })
 }

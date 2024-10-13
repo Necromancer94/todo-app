@@ -1,5 +1,6 @@
 import { createtodoElement } from "./createtodoElement.js"
-import { selectors, showElement, hideElement, fadeElement } from "./utils.js";
+import { selectors } from "./utils.js";
+import { removeModal } from "./modalOverlay.js";
 import { localItems } from "./localItems.js"
 import { listState, updateCount } from "./listState.js";
 import { createNotification } from "./createNotification.js"
@@ -94,34 +95,11 @@ export const todoActions = {
         localItems.updateItems()
     },
 
-    storeColor: function (colorElement) { 
-
-        const selectedColor = colorElement.style.backgroundColor
-        const closestItem = colorElement.closest('.todo-item');
-        closestItem.style.backgroundColor = selectedColor
-
-        const selectedTodo = findTodo(colorElement)
-        selectedTodo.color = selectedColor
-        localItems.updateItems()
-    },
-
     editTodo: function (paragraphElement) { 
 
         const selectedTodo = findTodo(paragraphElement)
         selectedTodo.text = paragraphElement.textContent.trim()
         localItems.updateItems()
-    },
-
-    revealColorPalette: function (defColor) {
-
-        const closestPallete = defColor.parentNode.querySelector('.other-colors')
-        showElement(closestPallete)
-        closestPallete.classList.add('animation-start')
-
-        // fadeElement(closestPallete, 3000)
-        setTimeout(() => {
-            hideElement(closestPallete)
-        }, 3000)
     },
 
     storeDate: function (dateInput){ 
@@ -130,23 +108,27 @@ export const todoActions = {
         localItems.updateItems()
     },
 
-    revealEmojis: function (defEmoji) {
+    storeEmoji: function (clickedEmoji, lastClickedEmoji) { 
 
-        const emojiContainer = defEmoji.parentNode.querySelector('.emoji-container')
-        showElement(emojiContainer)
-        emojiContainer.classList.add('animation-start')
-        // fadeElement(emojiContainer, 3000)
-        setTimeout(() => {
-            hideElement(emojiContainer)
-        }, 3000)
+        const selectedTodo = findTodo(lastClickedEmoji)
+        selectedTodo.emoji = clickedEmoji.textContent
+        const placedEmoji = lastClickedEmoji.closest('.todo-item').querySelector('.placed-emoji');
+        placedEmoji.textContent = clickedEmoji.textContent
+
+        removeModal()
+        localItems.updateItems()
     },
 
-    storeEmoji: function (clickedEmoji) { 
+    storeColor: function (clickedColor, lastClickedColorIcon) { 
 
-        const selectedTodo = findTodo(clickedEmoji)
-        selectedTodo.emoji = clickedEmoji.textContent
-        const placedEmoji = clickedEmoji.closest('.todo-item').querySelector('.placed-emoji');
-        placedEmoji.textContent = clickedEmoji.textContent
+        const selectedColor = clickedColor.style.backgroundColor
+        const closestItem = lastClickedColorIcon.closest('.todo-item');
+        closestItem.style.backgroundColor = selectedColor
+
+        const selectedTodo = findTodo(lastClickedColorIcon)
+        selectedTodo.color = selectedColor
+
+        removeModal()
         localItems.updateItems()
     },
 }
