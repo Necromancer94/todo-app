@@ -4,14 +4,14 @@ async function deleteNotifications() {
     })
 }
 
-export async function createNotification(text, isWarning = false) {
+export async function createNotification(text, warning = '') {
 
     await deleteNotifications()
 
     const body = document.querySelector('body')
     const newNotification = document.createElement('div')
     newNotification.classList.add('notification-box', 'notification-entry')
-    newNotification.innerHTML = getHTML(text, isWarning)
+    newNotification.innerHTML = getNotificationHTML(text, warning)
 
     body.appendChild(newNotification)
     setTimeout(() => {
@@ -23,7 +23,7 @@ export async function createNotification(text, isWarning = false) {
 
 }
 
-function getHTML(content, warning) {
+function getNotificationHTML(content, warning = '') {
 
     if (warning) {
         return `<div role="alert" class="rounded border-s-4 border-red-500 bg-red-50 p-4">

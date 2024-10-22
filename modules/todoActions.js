@@ -16,23 +16,26 @@ export function findTodo(element) {
     return selectedTodo
 }
 
+function createTodoObject (text, id){
+    return {
+        text,
+        completed: false,
+        date: null,
+        prio: null,
+        color: null,
+        emoji: null,
+        id
+    }
+}
+
 export const todoActions = {
 
     addTodo: function () {
 
         const todoText = selectors.todoInput.value.trim()
         if (todoText) {
-            
-            const todoObj = {
-                text: todoText,
-                completed: false,
-                date: null,
-                prio: null,
-                color: null,
-                emoji: null,
-                id: listState.currentID
-            }
 
+            const todoObj = createTodoObject(todoText, listState.currentID)
             const newTodo = createtodoElement(todoObj)
 
             listState.currentID++
@@ -48,7 +51,6 @@ export const todoActions = {
             else {
                 createNotification('A new todo was added!')
             }
-            
         }
 
         else {
@@ -60,18 +62,10 @@ export const todoActions = {
 
     completeTodo: function (checkbox) {
 
-        if (checkbox.checked) {
-            checkbox.closest('.todo-item').classList.add('line-through', '!text-gray-500')
+        checkbox.closest('.todo-item').querySelector('.todo-content').classList.toggle('line-through')
 
-            const matchedTodo = findTodo(checkbox)
-            matchedTodo.completed = true
-        }
-
-        else {
-            checkbox.closest('.todo-item').classList.remove('line-through', '!text-gray-500')
-            const matchedTodo = findTodo(checkbox)
-            matchedTodo.completed = false
-        }
+        const matchedTodo = findTodo(checkbox)
+        matchedTodo.completed = checkbox.checked
 
         updateCount()
         localItems.updateItems()
@@ -79,11 +73,12 @@ export const todoActions = {
 
     deleteTodo: function (deleteIcon) {
 
-        const closestTodo = deleteIcon.closest('.todo-item')
-        const todoContent = closestTodo.querySelector('.todo-content').textContent.trim();
+        const selectedTodo = findTodo(deleteIcon)
+        localItems.removeItem(selectedTodo)
 
-        localItems.removeItem(todoContent)
+        const closestTodo = deleteIcon.closest('.todo-item')
         closestTodo.remove()
+        
         createNotification('Removed one todo!')
     },
 

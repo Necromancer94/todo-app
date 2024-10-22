@@ -1,6 +1,6 @@
 import { createNotification } from "./createNotification.js"
 import { selectors, removeAllTodos } from "./utils.js"
-import {renderList} from '../main.js'
+import { renderList } from "./utils.js"
 
 export const listState = {
     todoList: JSON.parse(localStorage.getItem('todos')) ?? [],
@@ -43,7 +43,7 @@ export function filterPrio(event) {
         return listState.appliedFilter.startsWith(prioText)
     })
 
-    if (otherTodos.length > 0) {
+    if (otherTodos.length) {
         renderList(otherTodos)
     }
 

@@ -51,9 +51,9 @@ export function loadEventListeners() {
             lastClickedColorIcon = event.target.closest('.default-color')
         }
 
-        if (event.target.closest('.default-emoji')) {
+        if (event.target.matches('.placed-emoji')) {
             showModal(emojiContainer, 'Choose an emoji')
-            lastClickedEmojiIcon = event.target.closest('.default-emoji')
+            lastClickedEmojiIcon = event.target.closest('.placed-emoji')
         }
 
         if (event.target.closest('.delete-icon')) {
