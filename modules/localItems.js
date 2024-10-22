@@ -21,7 +21,7 @@ export const localItems = {
     },
 
    getListProperties: function() {
-        selectors.listTitle.value = localStorage.getItem('list-title') ?? 'Edit me'
-        selectors.listDescription.value = localStorage.getItem('list-description') ?? 'Edit me'
+        selectors.listTitle.value = localStorage.getItem('list-title') ?? 'Give your awesome to-do list a name'
+        selectors.listDescription.value = localStorage.getItem('list-description') ?? 'Give your awesome to-do list a description'
     },
 }

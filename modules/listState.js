@@ -11,7 +11,7 @@ export const listState = {
 
 export function updateCount() {
     const remainingTodos = listState.todoList.filter((todo) => {
-        return todo.completed == false
+        return !todo.completed
     })
 
     listState.leftoverCount = remainingTodos.length

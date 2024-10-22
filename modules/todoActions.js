@@ -8,7 +8,7 @@ import { createNotification } from "./createNotification.js"
 export function findTodo(element) {
 
     const selectedTodoID = element.closest('.todo-item').getAttribute('data-id').trim()
-    
+
     const selectedTodo = listState.todoList.find((todo) => {
         return todo.id == selectedTodoID
     })
@@ -16,7 +16,7 @@ export function findTodo(element) {
     return selectedTodo
 }
 
-function createTodoObject (text, id){
+function createTodoObject(text, id) {
     return {
         text,
         completed: false,
@@ -33,28 +33,27 @@ export const todoActions = {
     addTodo: function () {
 
         const todoText = selectors.todoInput.value.trim()
-        if (todoText) {
 
-            const todoObj = createTodoObject(todoText, listState.currentID)
-            const newTodo = createtodoElement(todoObj)
+        if (!todoText) {
+            createNotification('No input provided!', 'warning')
+            return
+        }
 
-            listState.currentID++
+        const todoObj = createTodoObject(todoText, listState.currentID)
+        const newTodo = createtodoElement(todoObj)
 
-            localItems.addItem(todoObj)
+        listState.currentID++
 
-            if(listState.appliedFilter){
-                newTodo.remove()
-                createNotification('A new todo was added but is hidden!')
+        localItems.addItem(todoObj)
 
-            }
+        if (listState.appliedFilter) {
+            newTodo.remove()
+            createNotification('A new todo was added but is hidden!')
 
-            else {
-                createNotification('A new todo was added!')
-            }
         }
 
         else {
-            createNotification('No input provided!', 'warning')
+            createNotification('A new todo was added!')
         }
 
         selectors.todoInput.value = ''
@@ -78,11 +77,11 @@ export const todoActions = {
 
         const closestTodo = deleteIcon.closest('.todo-item')
         closestTodo.remove()
-        
+
         createNotification('Removed one todo!')
     },
 
-    storePrio: function (dropdown) { 
+    storePrio: function (dropdown) {
 
         const priority = dropdown.value
         const matchedTodo = findTodo(dropdown)
@@ -90,20 +89,20 @@ export const todoActions = {
         localItems.updateItems()
     },
 
-    editTodo: function (paragraphElement) { 
+    editTodo: function (paragraphElement) {
 
         const selectedTodo = findTodo(paragraphElement)
         selectedTodo.text = paragraphElement.textContent.trim()
         localItems.updateItems()
     },
 
-    storeDate: function (dateInput){ 
+    storeDate: function (dateInput) {
         const selectedTodo = findTodo(dateInput)
         selectedTodo.date = dateInput.value
         localItems.updateItems()
     },
 
-    storeEmoji: function (clickedEmoji, lastClickedEmoji) { 
+    storeEmoji: function (clickedEmoji, lastClickedEmoji) {
 
         const selectedTodo = findTodo(lastClickedEmoji)
         selectedTodo.emoji = clickedEmoji.textContent
@@ -114,7 +113,7 @@ export const todoActions = {
         localItems.updateItems()
     },
 
-    storeColor: function (clickedColor, lastClickedColorIcon) { 
+    storeColor: function (clickedColor, lastClickedColorIcon) {
 
         const selectedColor = clickedColor.style.backgroundColor
         const closestItem = lastClickedColorIcon.closest('.todo-item');
